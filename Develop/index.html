@@ -30,9 +30,101 @@
     </header>
     <div class="container">
       <!-- Timeblocks go here -->
+      <div class="row hour" id="9">
+        <div class="col-md-1 m-auto">9 a.m.</div>
+        <textarea class="col-md-10"></textarea>
+        <button class = "saveBtn">Save</button>
+      </div>
+
+      <div class="row hour" id="10">
+        <div class="col-md-1 m-auto">10 a.m.</div>
+        <textarea class="col-md-10"></textarea>
+        <button class = "saveBtn">Save</button>
+      </div>
+
+      <div class="row hour" id="11">
+        <div class="col-md-1 m-auto">11 a.m.</div>
+        <textarea class="col-md-10"></textarea>
+        <button class = "saveBtn">Save</button>
+      </div>
+
+      <div class="row hour" id="12">
+        <div class="col-md-1 m-auto">12 p.m.</div>
+        <textarea class="col-md-10"></textarea>
+        <button class = "saveBtn">Save</button>
+      </div>
+
+      <div class="row hour" id="13">
+        <div class="col-md-1 m-auto">1 p.m.</div>
+        <textarea class="col-md-10"></textarea>
+        <button class = "saveBtn">Save</button>
+      </div>
+
+      <div class="row hour" id="14">
+        <div class="col-md-1 m-auto">2 p.m.</div>
+        <textarea class="col-md-10"></textarea>
+        <button class = "saveBtn">Save</button>
+      </div>
+
+      <div class="row hour" id="15">
+        <div class="col-md-1 m-auto">3 p.m.</div>
+        <textarea class="col-md-10"></textarea>
+        <button class = "saveBtn">Save</button>
+      </div>
+
+      <div class="row hour" id="16">
+        <div class="col-md-1 m-auto">4 p.m.</div>
+        <textarea class="col-md-10"></textarea>
+        <button class = "saveBtn">Save</button>
+      </div>
+
+      <div class="row hour" id="17">
+        <div class="col-md-1 m-auto">5 p.m.</div>
+        <textarea class="col-md-10"></textarea>
+        <button class = "saveBtn">Save</button>
+      </div>
+
     </div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
+    <script>
+      
+      $(".saveBtn").on("click", function() { 
+        var time = $(this).parent().attr("id");
+        var input = $(this).siblings("textarea").val();
+
+        //Look into how localStorage works
+        localStorage.setItem(time, input);
+      });
+
+
+      $("textarea").each(function(){
+        var currentHour = moment().hours();
+        var time = $(this).parent().attr("id");
+        time = parseInt(time);
+    
+        if(time<currentHour) {
+          $(this).addClass("past");
+        }
+        else if(time===currentHour) {
+          $(this).removeClass("past");
+          $(this).addClass("present");
+        } 
+        else {
+          $(this).removeClass("past");
+          $(this).removeClass("present");
+          $(this).addClass("future");
+        }
+      });
+
+      //Study this loop more
+      for (var i=9; i<18; i++) {
+        $(`#${i} textarea`).val(localStorage.getItem(i));
+      };
+
+    </script>
+
   </body>
 </html>
