@@ -69,3 +69,7 @@ textarea{
   font-size: 20px;
   transition: all .3s ease-in-out;
 }
+
+.row #17 {
+  margin-bottom: 20px;
+}
