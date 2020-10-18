@@ -30,7 +30,9 @@
     </header>
 
     <div class="container">
-      <!-- Timeblocks go here -->
+
+      <!-- Hardcoded individual rows for each hour of the day. 
+        Each id represents time for a 24 hour clock, which makes it easier to retrieve from storage by not having to specify a.m. or p.m.-->
       <div class="row" id="9">
         <div class="col-md-1  hour"> <br> 9 a.m.</div>
         <textarea class="col-md-10"></textarea>
@@ -92,15 +94,17 @@
 
     <script>
       
+      //Click event for the button to save to local storage.
       $(".saveBtn").on("click", function() { 
         var time = $(this).parent().attr("id");
         var input = $(this).siblings("textarea").val();
 
-        //Look into how localStorage works
+        //Saving time and input into local storage associates the value of the textarea with the id of the parent node
         localStorage.setItem(time, input);
       });
 
-
+      //Selecting and comparing each iteration of textarea to moment.js to check the time. Depending on whether it's past, present, or future,
+      //we give it a class accordingly. The class is tied into the CSS file to give it a specific color.
       $("textarea").each(function(){
         var currentHour = moment().hours();
         var time = $(this).parent().attr("id");
@@ -119,12 +123,24 @@
           $(this).addClass("future");
         }
       });
+      
+      //Omitted this code for being out of scope of our assignment:
+      // for (var i=9; i<18; i++) {
+      //   $(`#${i} textarea`).val(localStorage.getItem(i));
+      // };
 
-      //Study this loop more
-      for (var i=9; i<18; i++) {
-        $(`#${i} textarea`).val(localStorage.getItem(i));
-      };
+      //Hardcode for selecting each id's textarea and retrieving the previously saved data to bring it back to the screen.
+      $("#9 textarea").val(localStorage.getItem(9));
+      $("#10 textarea").val(localStorage.getItem(10));
+      $("#11 textarea").val(localStorage.getItem(11));
+      $("#12 textarea").val(localStorage.getItem(12));
+      $("#13 textarea").val(localStorage.getItem(13));
+      $("#14 textarea").val(localStorage.getItem(14));
+      $("#15 textarea").val(localStorage.getItem(15));
+      $("#16 textarea").val(localStorage.getItem(16));
+      $("#17 textarea").val(localStorage.getItem(17));
 
+      //Taking the current date from moment.js and appending it to the given currentDay id in the html section.
       $("#currentDay").append(moment().format('MMMM Do, YYYY'));
       
     </script>
